@@ -1,0 +1,15 @@
+@import 'mixins';
+
+// -------------------------------
+// General Layout Sizes
+// -------------------------------
+$max-width : 1000px;
+$content-padding : 1rem;
+
+// -------------------------------
+// Breakpoint Sizes
+// -------------------------------
+$mobile-small : 320px;
+$mobile       : 480px;
+$tablet-small : 600px;
+$tablet       : 800px;

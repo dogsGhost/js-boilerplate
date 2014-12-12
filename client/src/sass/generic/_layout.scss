@@ -1,0 +1,73 @@
+@import '../base';
+
+* {
+  box-sizing: border-box;
+}
+
+// ---------------------
+//  Page Structure
+// ---------------------
+.content-container {
+  position: relative;
+  width: 100%;
+  max-width: $max-width;
+  margin: 0 auto;
+}
+
+.inner-content {
+  position: relative;
+  padding: 0 $content-padding;
+  z-index: 2;
+}
+
+// ---------------------
+//  Base Styles
+// ---------------------
+img {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+}
+
+ul,ol {
+  padding: 0;
+  margin: 0;
+
+  &.unstyled {
+    list-style: none;
+  }
+}
+
+// ---------------------
+//  Helpers
+// ---------------------
+.clearfix {
+  &:before,
+  &:after {
+    content: ' ';
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+.text--center {
+  text-align: center;
+}
+
+.text--justify {
+  text-align: justify;
+}
