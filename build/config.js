@@ -3,16 +3,19 @@ module.exports = exports = {};
 // --------------------------
 // Common Paths
 // --------------------------
-// TODO: use PATH_JOIN everywhere
-
 var BASE      = exports.BASE      = '.'; // project root (not relative to this file)
 var PATH_JOIN = exports.PATH_JOIN = '/';
+var _slice    = [].slice;
 
-// all client files
+function path () {
+  return _slice.call(arguments).join(PATH_JOIN);
+}
+
+// static client files
 exports.client      = {};
-exports.client.base = exports.BASE + '/client';
-exports.client.src  = exports.client.base + '/src';
-exports.client.dest = exports.client.base + '/dist';
+exports.client.base = path(exports.BASE, 'client');
+exports.client.src  = path(exports.client.base, 'src');
+exports.client.dest = path(exports.client.base, 'dist');
 
 // --------------------------
 // Client Application
@@ -21,23 +24,23 @@ exports.app       = {};
 exports.app.entry = 'index.js';
 exports.app.dist  = 'app-bundle.js';
 exports.app.map   = exports.app.dist.replace('.js', '.map.json');
-exports.app.src   = exports.client.src  + '/app';
-exports.app.dest  = exports.client.dest + '/app';
+exports.app.src   = path(exports.client.src, 'app');
+exports.app.dest  = path(exports.client.dest, 'app');
 
 // --------------------------
 // Sass
 // --------------------------
 exports.sass = {
-  src       : exports.client.src + '/sass',
-  dest      : exports.client.dest + '/css',
+  src       : path(exports.client.src, 'sass'),
+  dest      : path(exports.client.dest, 'css'),
   prefix    : ['last 2 versions', '> 2%'],
   cssMinify : {
-    keepSpecialComments: 0
+    keepSpecialComments : 0
   }
 };
 
 // --------------------------
-// JavaScript
+// Code Quality (JS)
 // --------------------------
 exports.js = {};
 exports.js.globals = {
@@ -88,15 +91,14 @@ exports.karma = {
   autoWatch : true,
   logLevel  : 'INFO',
 
-  files: [
-    [exports.client.dest, exports.app.dist]
-      .join(exports.PATH_JOIN)
+  files : [
+    path(exports.client.dest, exports.app.dist)
       .replace(exports.BASE + exports.PATH_JOIN, '')
   ],
   exclude : [],
 
-  browsers: ['PhantomJS'],
-  plugins: [
+  browsers : ['PhantomJS'],
+  plugins  : [
     'karma-mocha',
     'karma-phantomjs-launcher',
     'karma-chai',

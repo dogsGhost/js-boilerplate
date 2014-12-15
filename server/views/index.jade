@@ -1,13 +1,4 @@
-doctype html
-html(lang='en')
-  head
-    title JS Boilerplate
-    meta(charset='utf-8')
-    meta(name='viewport' content='width=device-width, initial-scale=1')
-    link(rel='stylesheet' href='/static/css/global.css')
-  body
-    header
-    div.content-container
-      h1.text--center JS Boilerplate
-    footer
-    script(src='/static/app/app-bundle.js')
+extends ./layouts/main.jade
+
+block main-content
+  h1.text--center JS Boilerplate

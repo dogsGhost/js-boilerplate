@@ -1,13 +1,15 @@
-var path = require('path');
-
 // TODO: shouldn't have to care about relative paths
+var path = require('path');
+var env  = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
 module.exports = exports = {
-  server: {
-    listenPort : 3000,
-    distFolder : path.resolve(__dirname, '../../client/dist'),
-    static     : {
-      // cacheControl: 86400000 * 14 // 2 weeks
-      cacheControl: 86400000 * 0 // DEBUG ONLY
-    }
+  env  : env,
+  port : 3000,
+  gzip : {
+    threshold : 200
+  },
+  static : {
+    dest    : path.resolve(__dirname, '../../client/dist'),
+    expires : 86400000 * 7 // 1 week
   }
 };
