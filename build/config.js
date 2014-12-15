@@ -1,5 +1,6 @@
 module.exports = exports = {};
 
+
 // --------------------------
 // Common Paths
 // --------------------------
@@ -10,6 +11,11 @@ var _slice    = [].slice;
 function path () {
   return _slice.call(arguments).join(PATH_JOIN);
 }
+
+// environment constants
+exports.env = {};
+exports.env.DEV = exports.env.DEVELOPMENT = 'development';
+exports.env.PROD = exports.env.PRODUCTION = 'production';
 
 // static client files
 exports.client      = {};

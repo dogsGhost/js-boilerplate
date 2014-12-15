@@ -1,6 +1,5 @@
-// TODO: shouldn't have to care about relative paths
-var path = require('path');
-var env  = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+var path = require('path'),
+    env  = process.env.NODE_ENV; // this is set (or defaulted) in ../config.js
 
 module.exports = exports = {
   env  : env,

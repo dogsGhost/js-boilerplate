@@ -9,8 +9,7 @@ var fs          = require('fs'),
     compression = require('compression');
 
 // server configuration ==================
-var app = express(),
-    server;
+var app = express(), server;
 
 app.set('port', config.port || 3000);
 app.use(logger('dev'));
@@ -36,16 +35,18 @@ app.use(function (req, res, next) {
 });
 
 app.use(function (err, req, res, next) {
+  var status = err.status || 500;
+
   console.log(err);
-  res.status(err.status || 500);
-  res.end('Server Error: ' + (err.status || 500));
+  res.status(status);
+  res.end('Server Error: ' + status);
 });
 
 // application exports ===================
-app.start = function(port) {
+app.start = function (port) {
+  console.log('Server starting on environment: %s', config.env);
   return server = app.listen(app.get('port'), function () {
-    console.log('Server running on environment: ' + config.env);
-    console.log('Server listening on port: ' + server.address().port);
+    console.log('Server listening on port: %s', server.address().port);
   });
 };
 
