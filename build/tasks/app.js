@@ -29,9 +29,8 @@ module.exports = function appTask (config, plugins) {
 
   gulp.task('app:watch', function () {
     var watcher = watchify(getBundler());
-    
+  
     watcher.on('update', function () {
-      common.log('* Browserify file change detected.');
       bundle(watcher);
     });
     bundle(watcher);
@@ -43,6 +42,7 @@ module.exports = function appTask (config, plugins) {
 
   function bundle (bundler, callback) {
     var start = now();
+    common.log('Bundle started.')
 
     if (common.isProd()) {
       bundler.plugin('minifyify', {
@@ -56,7 +56,7 @@ module.exports = function appTask (config, plugins) {
       .pipe(source(config.app.dist))
       .pipe(gulp.dest(config.app.dest))
       .on('end', function () {
-        common.log('Bundle finished after: %s ms', (now() - start));
+        common.log('Bundle finished after: %s ms.', (now() - start));
         if (callback && typeof callback === 'function') {
           callback();
         }

@@ -1,7 +1,7 @@
 var gulp   = require('gulp'),
     common = require('gulp-common');
 
-module.exports = function serverTask (config, plugins, exports) {
+module.exports = function serverTask (config, plugins) {
   var app = require('../../server'),
       server;
 

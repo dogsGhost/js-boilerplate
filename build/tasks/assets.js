@@ -1,7 +1,7 @@
 var gulp   = require('gulp'),
     common = require('gulp-common');
 
-module.exports = function assetsTask (config, plugins, exports) {
+module.exports = function assetsTask (config, plugins) {
 
   gulp.task('assets', ['sass', 'img'], function () {
     // done...
