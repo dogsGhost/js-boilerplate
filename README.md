@@ -43,6 +43,34 @@ gulp dev
 
 Which will run an initial build, spin up your server, and then kick off watch tasks to make your life easier as you edit any JavaScript, Sass, Images, and server files!
 
+Each component type also comes with its own individual watch task, in the event that you wish to use it independently. For example:
+
+```
+gulp app:watch
+gulp sass:watch
+gulp img:watch
+gulp server:watch
+```
+
+Gulp tasks are auto-loaded from the build/tasks directory, so if you need to add your own just create a new file! It may be helpful to check out existing task exports, because each task is injected with application-wide dependencies.
+
+Deployment
+==========
+
+This project is structured to make use of environment-specific configuration files (and auto-ignores any file directly within a config folder not named "development" for your safety). Because of this, deployment is achieved fairly easily simply by modifying your NODE_ENV and ensuring that the tasks are updated to your liking. By default, there's a task:
+
+```
+gulp deploy:prod
+```
+
+Which explicitly forces your NODE_ENV to production, thereby modifying the behavior of specific tasks. For example, with this environment, front-end assets such as application bundles and styles are now minified. In versions to come, adding your own production (or other environment-specific) tasks will be made even more straight-forward through the use of a ":namespace"-like syntax.
+
+Style Guide
+===========
+
+- Paths should **not** end in a trailing slash.
+- 2 Spaces for indentation *everywhere*.
+
 TODO
 ====
 
@@ -52,3 +80,4 @@ TODO
 - Deployment tasks
 - Image compression
 - Different sass compiler? e.g. Ruby-Sass
+- Task tracking with ":namespace"

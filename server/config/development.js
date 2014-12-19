@@ -1,14 +1,21 @@
 var path = require('path'),
     env  = process.env.NODE_ENV; // this is set (or defaulted) in ../config.js
 
-module.exports = exports = {
-  env  : env,
-  port : 3000,
-  gzip : {
-    threshold : 200
-  },
-  static : {
-    dest    : path.resolve(__dirname, '../../client/dist'),
-    expires : 86400000 * 7 // 1 week
-  }
-};
+module.exports = function (base) {
+  var buildConfig = require(base + '/build/config');
+
+  var config = {
+    env  : env,
+    port : 3000,
+    gzip : {
+      enabled   : true,
+      threshold : 200   // kb (kilobytes)
+    },
+    static : {
+      dest    : path.resolve(base, buildConfig.client.dest),
+      expires : 86400000 * 7 // 1 week
+    }
+  };
+
+  return config;
+}

@@ -15,7 +15,10 @@ app.set('port', config.port || 3000);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-app.use(compression(config.gzip));
+
+if (config.gzip.enabled) {
+  app.use(compression(config.gzip));
+}
 
 // views and templating
 app.set('views', __dirname + '/views');
@@ -44,9 +47,14 @@ app.use(function (err, req, res, next) {
 
 // application exports ===================
 app.start = function (port) {
-  console.log('Server starting on environment: %s', config.env);
   return server = app.listen(app.get('port'), function () {
-    console.log('Server listening on port: %s', server.address().port);
+    console.log.apply(console, [
+      '\nServer Started         ',
+      '\n========================',
+      '\nEnv  : ' + process.env.NODE_ENV,
+      '\nPort : ' + server.address().port,
+      '\n------------------------'
+    ]);
   });
 };
 

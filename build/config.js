@@ -24,6 +24,18 @@ exports.client.src  = path(exports.client.base, 'src');
 exports.client.dest = path(exports.client.base, 'dist');
 
 // --------------------------
+// Server
+// --------------------------
+exports.server         = {};
+exports.server.base    = path(exports.BASE, 'server');
+exports.server.nodemon = {
+  script : path(exports.server.base, 'start.js'),
+  ext    : 'js',
+  env    : { 'NODE_ENV' : 'development' },
+  ignore : path(exports.client.base, '**')
+};
+
+// --------------------------
 // Client Application
 // --------------------------
 exports.app       = {};

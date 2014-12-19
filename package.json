@@ -34,6 +34,7 @@
     "gulp-common": "git+https://git@github.com/davezuko/gulp-common",
     "gulp-load-plugins": "^0.8.0",
     "gulp-minify-css": "^0.3.11",
+    "gulp-nodemon": "^1.0.4",
     "gulp-plumber": "^0.6.6",
     "gulp-sass": "^1.2.4",
     "gulp-watch": "^3.0.0",

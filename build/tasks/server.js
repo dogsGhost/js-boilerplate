@@ -10,6 +10,6 @@ module.exports = function serverTask (config, plugins) {
   });
 
   gulp.task('server:watch', function () {
-
+    plugins.nodemon(config.server.nodemon);
   });
 };
