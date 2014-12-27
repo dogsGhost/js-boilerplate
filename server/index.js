@@ -1,5 +1,6 @@
 // configuration =========================
-var config = require('./config');
+var config       = require('./config'),
+    DEFAULT_PORT = 3000;
 
 // module dependencies ===================
 var fs          = require('fs'),
@@ -11,13 +12,19 @@ var fs          = require('fs'),
 // server configuration ==================
 var app = express(), server;
 
-app.set('port', config.port || 3000);
+app.set('port',
+  typeof config.port !== undefined ? config.port : DEFAULT_PORT
+);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
-if (config.gzip.enabled) {
+// optional configuration
+if (config.gzip && config.gzip.enabled) {
   app.use(compression(config.gzip));
+}
+if (config.proxy && config.proxy.trust) {
+  app.enable('trust proxy');
 }
 
 // views and templating

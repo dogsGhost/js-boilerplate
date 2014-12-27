@@ -11,6 +11,9 @@ module.exports = function (base) {
       enabled   : true,
       threshold : 200   // kb (kilobytes)
     },
+    proxy : {
+      trust : true // trust x-forwarded-* headers
+    },
     static : {
       dest    : path.resolve(base, buildConfig.client.dest),
       expires : 86400000 * 7 // 1 week

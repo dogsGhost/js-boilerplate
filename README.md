@@ -58,7 +58,7 @@ gulp server:watch
 
 Gulp tasks are auto-loaded from the build/tasks directory, so if you need to add your own just create a new file! It may be helpful to check out existing task exports, because each task module is injected with common dependencies. An example task exports:
 
-```
+```js
 module.exports = function (config, plugins) {
   
   gulp.task('yourCustomTask', function () {
@@ -81,6 +81,22 @@ gulp deploy:prod
 
 Which explicitly sets your NODE_ENV to production, thereby modifying the behavior of specific tasks. For example, with this environment, front-end assets such as application bundles and styles are now minified.
 
+Notes
+=====
+
+X-Forwarded-* Header
+--------------------
+
+Express apps commonly sit behind reverse proxies (e.g. nginx), so the default configuration provided enables the "trust proxy" functionality within nginx. If you wish to modify this, you can modify this flag in the server config as:
+
+```js
+{
+  proxy : {
+    trust : true
+  }
+}
+```
+
 Style Guide
 ===========
 
@@ -99,3 +115,4 @@ TODO
 - Jade precompiling (and/or caching)
 - gtmetrix / google perf examples
 - Task tracking with ":namespace" (e.g. ":watch", ":prod")
+- Favicon

@@ -12,11 +12,18 @@ module.exports = function assetsTask (config, plugins) {
   });
 
   gulp.task('sass', function () {
-    gulp.src(config.sass.src + '/*.scss')
+    var stream = gulp.src(config.sass.src + '/*.scss')
       .pipe(plugins.plumber())
       .pipe(plugins.sass())
       .pipe(plugins.autoprefixer.apply(config.sass.prefix))
-      .pipe(plugins.minifyCss(config.sass.cssMinify))
+
+    if (common.isProd()) {
+      stream = stream.pipe(
+        plugins.minifyCss(config.sass.cssMinify)
+      );
+    }
+
+    stream
       .pipe(gulp.dest(config.sass.dest));
   });
 
