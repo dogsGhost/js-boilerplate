@@ -87,7 +87,7 @@ Notes
 X-Forwarded-* Header
 --------------------
 
-Express apps commonly sit behind reverse proxies (e.g. nginx), so the default configuration provided enables the "trust proxy" functionality within nginx. If you wish to modify this, you can modify this flag in the server config as:
+Express apps commonly sit behind reverse proxies (e.g. nginx), so the default configuration provided enables express's "trust proxy" functionality. If you wish to modify this, you can find this flag in the server config as:
 
 ```js
 {
