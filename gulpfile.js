@@ -1,10 +1,11 @@
-require('gulp-common')
-  .loadTasks(
-    __dirname + '/build/tasks',
-    [
-      require('./build/config'),
-      require('gulp-load-plugins')({
-        scope: ['devDependencies']
-      })
-    ]
-  );
+var common = require('gulp-common');
+
+common.loadTasks({
+  tasks : common.path(__dirname, 'build/tasks'),
+  args  : [
+    require('./build/config'),
+    require('gulp-load-plugins')({
+      scope: ['devDependencies']
+    })
+  ]
+});

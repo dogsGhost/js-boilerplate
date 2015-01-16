@@ -7,7 +7,6 @@ var gulp       = require('gulp'),
 module.exports = function appTask (config, plugins) {
 
   // Module Constants ==============
-
   var BUNDLE_ENTRY = [
     config.app.src,
     config.app.entry
@@ -53,14 +52,20 @@ module.exports = function appTask (config, plugins) {
 
     bundler
       .bundle()
-      .pipe(source(config.app.dist))
-      .pipe(gulp.dest(config.app.dest))
+      .on('error', function (err) {
+        common.log(err.message);
+
+        // don't kill watch process if in development.
+        if (!common.isProd()) this.emit('end');
+      })
       .on('end', function () {
         common.log('Bundle finished after: %s ms.', (now() - start));
         if (callback && typeof callback === 'function') {
           callback();
         }
-      });
+      })
+      .pipe(source(config.app.dist))
+      .pipe(gulp.dest(config.app.dest))
   }
 
   function now () {
