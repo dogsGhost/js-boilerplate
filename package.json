@@ -22,11 +22,8 @@
     "compression": "~1.0.9",
     "debug": "~0.7.4",
     "express": "~4.7.2",
-    "flux": "^2.0.1",
     "jade": "~1.6.0",
     "morgan": "~1.0.0",
-    "ramda": "^0.9.0",
-    "react": "^0.12.2",
     "serve-favicon": "~2.0.1"
   },
   "devDependencies": {
@@ -43,7 +40,6 @@
     "gulp-sass": "^1.2.4",
     "gulp-watch": "^3.0.0",
     "minifyify": "^4.4.0",
-    "reactify": "^0.17.1",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.2.1"
   }

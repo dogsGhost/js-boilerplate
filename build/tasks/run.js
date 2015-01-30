@@ -3,11 +3,11 @@ var gulp   = require('gulp'),
 
 module.exports = function defaultTask (config, plugins) {
 
-  gulp.task('build', ['app', 'assets'], function () {
+  gulp.task('build', ['client'], function () {
     // done...
   });
 
-  gulp.task('dev', ['app:watch', 'assets:watch', 'server:watch'], function () {
+  gulp.task('dev', ['client:watch', 'server:watch'], function () {
     // done...
   });
 

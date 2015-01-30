@@ -4,7 +4,7 @@ var gulp       = require('gulp'),
     watchify   = require('watchify'),
     browserify = require('browserify');
 
-module.exports = function appTask (config, plugins) {
+module.exports = function (config, plugins) {
 
   function getBundler () {
     return browserify(config.app.bundle)
@@ -21,7 +21,6 @@ module.exports = function appTask (config, plugins) {
     watcher.on('update', function () {
       bundle(watcher);
     });
-    plugins.livereload.listen(config.client.reload);
   });
 
   function bundle (bundler, callback) {

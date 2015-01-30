@@ -34,7 +34,7 @@ exports.app.bundle = {
   debug        : true,
   entries      : exports.app.src + PATH_JOIN + exports.app.entry,
   fullPaths    : true,
-  transform    : ['6to5ify', 'reactify'],
+  transform    : ['6to5ify'],
   packageCache : {}
 };
 

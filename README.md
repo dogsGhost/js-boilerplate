@@ -6,9 +6,24 @@ Simple boilerplate application for quickly getting started on almost any JS-base
 The Stack
 ---------
 
-- Express.js on the back-end with Jade as the default templating language. Pre-configured with a primary layout file. Gzipping is enabled by default.
-- Browserify on the front-end for npm-style dependency management.
-- Sass for CSS pre-processing (currently uses gulp-sass).
+* Express.js on the back-end.
+  - Jade templates by default
+  - Gzip enabled by default
+  - Pre-configured with routes for views/static assets
+  - Support for environment-specific configuration
+
+* Browserify on the front-end for npm-style dependency management.
+  - Watchify with livereload
+  - ES6 to ES5 transpiling by default
+
+* Sass for CSS pre-processing (gulp-sass).
+  - Autoprefixer
+  - Livereload
+
+* Gulp for build management
+  - Edit-in-one-place configuration
+  - Modularized (and auto-loaded) tasks
+  - TODO: cache busting
 
 Installation
 ============
@@ -28,13 +43,13 @@ gulp build
 gulp server
 ```
 
-If you'd like to make tweaks to the project structure, most changes can be made directly in:
+If you'd like to make tweaks to the project or build structure, most changes can be made as configuration changes directly in:
 
 ```
 build/config.js
 ```
 
-By changing primary paths. Tasks are also located within the build directory, and it's incredibly easy to update the build task (such as "bundle" for the front-end) to support technologies such as React!
+**Note** Livereload browser extension is required if you wish to use that during development!
 
 Development
 ===========
@@ -73,7 +88,7 @@ Where config is the configuration file from build/config.js and plugins are auto
 Deployment
 ==========
 
-This project is structured to make use of environment-specific configuration files (and auto-ignores any file directly within a config folder not named "development" for your safety). Because of this, deployment is achieved fairly easily simply by modifying your NODE_ENV and ensuring that the tasks are updated to your liking. By default, there's a task:
+This project is structured to make use of environment-specific configuration files (and auto-ignores any file directly within a config folder not named "development" for your safety). Because of this, deployment is achieved fairly easily by modifying your NODE_ENV and ensuring that the tasks are updated to your liking. By default, there's a task:
 
 ```
 gulp deploy:prod
@@ -106,7 +121,6 @@ Style Guide
 TODO
 ====
 
-- find a better way to initialize gulp tasks with task-wide dependencies (currently each task is too tightly coupled to their call in gulpfile.js)
 - Karma test runner
 - Linting (client + server)
 - Deployment tasks
