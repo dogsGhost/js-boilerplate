@@ -24,11 +24,12 @@ module.exports = function assetsTask (config, plugins) {
     }
 
     stream
-      .pipe(gulp.dest(config.sass.dest));
+      .pipe(gulp.dest(config.sass.dest))
+      .pipe(plugins.livereload());
   });
 
   gulp.task('sass:watch', ['sass'], function () {
-    gulp.watch(config.sass.src + '/**/*.scss', ['sass']);
+    gulp.watch(config.sass.src + '/**/*.scss', ['sass'])
   });
 
   // TODO: move paths to config

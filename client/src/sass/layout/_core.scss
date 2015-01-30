@@ -1,4 +1,4 @@
-@import '../base';
+@import '../base/base';
 
 * {
   box-sizing: border-box;
@@ -14,12 +14,6 @@
   margin: 0 auto;
 }
 
-.inner-content {
-  position: relative;
-  padding: 0 $content-padding;
-  z-index: 2;
-}
-
 // ---------------------
 //  Base Styles
 // ---------------------
@@ -29,17 +23,20 @@ img {
   margin: 0 auto;
 }
 
-ul,ol {
+.list-unstyled {
+  list-style: none;
   padding: 0;
-  margin: 0;
-
-  &.unstyled {
-    list-style: none;
+}
+.list-inline {
+  @extend .clearfix;
+  
+  > li {
+    float: left;
   }
 }
 
 // ---------------------
-//  Helpers
+//  Utils
 // ---------------------
 .clearfix {
   &:before,
@@ -68,6 +65,15 @@ ul,ol {
   text-align: center;
 }
 
-.text--justify {
-  text-align: justify;
+.text--super-light {
+  font-weight: 100; 
+}
+.text--light {
+  font-weight: 200;
+}
+.text--bold {
+  font-weight: 700;
+}
+.text--super-bold {
+  font-weight: 900;
 }

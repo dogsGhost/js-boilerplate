@@ -2,7 +2,7 @@ var gulp   = require('gulp'),
     common = require('gulp-common');
 
 module.exports = function serverTask (config, plugins) {
-  var app = require('../../server'),
+  var app = require(config.server.base),
       server;
 
   gulp.task('server', function () {
@@ -10,6 +10,7 @@ module.exports = function serverTask (config, plugins) {
   });
 
   gulp.task('server:watch', function () {
-    plugins.nodemon(config.server.nodemon);
+    gulp.start('server');
+    // plugins.nodemon(config.server.nodemon);
   });
 };

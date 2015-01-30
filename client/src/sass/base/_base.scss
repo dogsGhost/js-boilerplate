@@ -1,10 +1,12 @@
-@import 'mixins';
+// TODO: move mixins to within base?
+@import '../mixins/colors';
+@import '../mixins/responsive';
 
 // -------------------------------
 // General Layout Sizes
 // -------------------------------
-$max-width : 1000px;
-$content-padding : 1rem;
+$max-width: 1000px;
+$content-padding: 1rem;
 
 // -------------------------------
 // Breakpoint Sizes

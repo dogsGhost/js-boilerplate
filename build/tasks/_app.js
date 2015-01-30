@@ -6,21 +6,9 @@ var gulp       = require('gulp'),
 
 module.exports = function appTask (config, plugins) {
 
-  // Module Constants ==============
-  var BUNDLE_ENTRY = [
-    config.app.src,
-    config.app.entry
-  ].join(config.PATH_JOIN);
-
-  var BUNDLE_CONFIG = {
-    cache        : {},
-    debug        : true,
-    entries      : [BUNDLE_ENTRY],
-    fullPaths    : true,
-    packageCache : {}
-  };
-
-  // ===============================
+  function getBundler () {
+    return browserify(config.app.bundle)
+  }
 
   gulp.task('app', function (callback) {
     bundle(getBundler(), callback);
@@ -29,19 +17,15 @@ module.exports = function appTask (config, plugins) {
   gulp.task('app:watch', function () {
     var watcher = watchify(getBundler());
   
+    bundle(watcher);
     watcher.on('update', function () {
       bundle(watcher);
     });
-    bundle(watcher);
+    plugins.livereload.listen(config.client.reload);
   });
-
-  function getBundler () {
-    return browserify(BUNDLE_CONFIG);
-  }
 
   function bundle (bundler, callback) {
     var start = now();
-    common.log('Bundle started.')
 
     if (common.isProd()) {
       bundler.plugin('minifyify', {
@@ -53,23 +37,19 @@ module.exports = function appTask (config, plugins) {
     bundler
       .bundle()
       .on('error', function (err) {
-        common.log(err.message);
-
-        // don't kill watch process if in development.
-        if (!common.isProd()) this.emit('end');
+         common.log(err.message);
+         this.emit('end');
       })
       .on('end', function () {
         common.log('Bundle finished after: %s ms.', (now() - start));
-        if (callback && typeof callback === 'function') {
-          callback();
-        }
+        callback && callback();
       })
       .pipe(source(config.app.dist))
       .pipe(gulp.dest(config.app.dest))
+      .pipe(plugins.livereload())
   }
 
   function now () {
     return new Date().getTime();
   }
-
 };

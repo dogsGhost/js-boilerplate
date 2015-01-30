@@ -1,16 +1,12 @@
 module.exports = exports = {};
 
-
 // --------------------------
 // Common Paths
 // --------------------------
-var BASE      = exports.BASE      = '.'; // project root (not relative to this file)
+var path      = require('path').resolve;
+var BASE      = exports.BASE      = path(__dirname + '/../');
 var PATH_JOIN = exports.PATH_JOIN = '/';
 var _slice    = [].slice;
-
-function path () {
-  return _slice.call(arguments).join(PATH_JOIN);
-}
 
 // environment constants
 exports.env = {};
@@ -18,10 +14,29 @@ exports.env.DEV = exports.env.DEVELOPMENT = 'development';
 exports.env.PROD = exports.env.PRODUCTION = 'production';
 
 // static client files
-exports.client      = {};
-exports.client.base = path(exports.BASE, 'client');
-exports.client.src  = path(exports.client.base, 'src');
-exports.client.dest = path(exports.client.base, 'dist');
+exports.client        = {};
+exports.client.base   = path(exports.BASE, 'client');
+exports.client.src    = path(exports.client.base, 'src');
+exports.client.dest   = path(exports.client.base, 'dist');
+exports.client.reload = undefined; // livereload port
+
+// --------------------------
+// Client Application
+// --------------------------
+exports.app        = {};
+exports.app.entry  = 'index.js';
+exports.app.dist   = 'app-bundle.js';
+exports.app.map    = exports.app.dist.replace('.js', '.map.json');
+exports.app.src    = path(exports.client.src, 'app');
+exports.app.dest   = path(exports.client.dest, 'app');
+exports.app.bundle = {
+  cache        : {},
+  debug        : true,
+  entries      : exports.app.src + PATH_JOIN + exports.app.entry,
+  fullPaths    : true,
+  transform    : ['6to5ify', 'reactify'],
+  packageCache : {}
+};
 
 // --------------------------
 // Server
@@ -32,18 +47,11 @@ exports.server.nodemon = {
   script : path(exports.server.base, 'start.js'),
   ext    : 'js',
   env    : { 'NODE_ENV' : 'development' },
-  ignore : path(exports.client.base, '**')
+  ignore : [
+    path(exports.client.base, '**'),
+    path(BASE, 'build', '**')
+  ]
 };
-
-// --------------------------
-// Client Application
-// --------------------------
-exports.app       = {};
-exports.app.entry = 'index.js';
-exports.app.dist  = 'app-bundle.js';
-exports.app.map   = exports.app.dist.replace('.js', '.map.json');
-exports.app.src   = path(exports.client.src, 'app');
-exports.app.dest  = path(exports.client.dest, 'app');
 
 // --------------------------
 // Sass

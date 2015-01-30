@@ -12,10 +12,9 @@ module.exports = function defaultTask (config, plugins) {
   });
 
   gulp.task('deploy', ['build'], function () {
-    // done...
+    gulp.start('server');
   });
 
-  // forces production environment before executing build tasks
   gulp.task('deploy:prod', function (callback) {
     process.env.NODE_ENV = config.env.PRODUCTION;
     common.log('Forced Node environment to: %s', common.env());
